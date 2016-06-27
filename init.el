@@ -43,12 +43,23 @@
 ;; ==== ==== ==== ==== KEY BIND ==== ==== ==== ====
 ;(global-set-key [M-kanji] 'ignore)
 ;(global-set-key [kanji] 'ignore)
-(define-key global-map (kbd "C-x f") 'recentf-open-files)
-(define-key global-map (kbd "C-h") 'delete-backward-char)
+;; ---- ---- common ---- ----
 (define-key global-map (kbd "C-c s") 'query-replace)
 (define-key global-map (kbd "C-c a") 'beginning-of-buffer)
 (define-key global-map (kbd "C-c e") 'end-of-buffer)
 (define-key global-map (kbd "C-c t") 'shell)
+(define-key global-map (kbd "C-h") 'delete-backward-char)
+(define-key global-map (kbd "M-n") 'scroll-up-command)
+(define-key global-map (kbd "M-p") 'scroll-down-command)
+;; ---- ---- original ---- ----
+(define-key global-map (kbd "C-c m") 'gfn-macro)
+(define-key global-map (kbd "C-c l") 'gfn-insert-line)
+;; ---- ---- helm ---- ----
+(define-key global-map (kbd "C-x C-b") 'helm-buffers-list)
+(define-key global-map (kbd "C-x C-f") 'helm-find-files)
+;; ---- ---- recentf ---- ----
+(define-key global-map (kbd "C-c f") 'recentf-open-files)
+;; ---- ---- tabbar ---- ----
 (define-key global-map (kbd "M-<right>") 'tabbar-forward-tab)
 (define-key global-map (kbd "M-<left>") 'tabbar-backward-tab)
 
@@ -57,8 +68,14 @@
 (require 'gfn-first)
 
 ;; ==== ==== ==== ==== DISTRIBUTED PACKAGES ==== ==== ==== ====
+;; ---- ---- f ---- ----
+(require 'f)
+
 ;; ---- ---- magit ---- ----
 ;(require 'magit)
+
+;; ---- ---- unicode-escape ---- ----
+;(require 'unicode-escape)
 
 ;; ---- ---- helm ---- ----
 (require 'helm-config)
