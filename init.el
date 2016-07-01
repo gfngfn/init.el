@@ -63,19 +63,28 @@
 (define-key global-map (kbd "M-<right>") 'tabbar-forward-tab)
 (define-key global-map (kbd "M-<left>") 'tabbar-backward-tab)
 
+;; ==== ==== ==== ==== OTHER SETTINGS ==== ==== ==== ====
+;; ---- ---- garbage collection ---- ----
+(setq gc-cons-threshold (* 20 gc-cons-threshold))
+
 ;; ==== ==== ==== ==== MY PACKAGES ==== ==== ==== ====
 (require 'gfn-latex)
 (require 'gfn-first)
+(require 'open-group)
 
 ;; ==== ==== ==== ==== DISTRIBUTED PACKAGES ==== ==== ==== ====
 ;; ---- ---- f ---- ----
-(require 'f)
+;(require 'f)
 
 ;; ---- ---- magit ---- ----
 ;(require 'magit)
 
 ;; ---- ---- unicode-escape ---- ----
 ;(require 'unicode-escape)
+
+;; ---- ---- save-place ---- ----
+;(setq-default save-place t)
+;(require 'save-place)
 
 ;; ---- ---- helm ---- ----
 (require 'helm-config)
@@ -119,20 +128,20 @@
 
 ;; ---- ---- autoinsert ---- ----
 (auto-insert-mode)
-(setq auto-insert-directory "~/.emacs.d/auto-insert/")
+(setq-default auto-insert-directory "~/.emacs.d/auto-insert/")
 (define-auto-insert "\\.tex$" "latex-template.tex")
 
 ;; ---- ---- yatex ---- ----
-(setq YaTeX-inhibit-prefix-letter t)
+(setq-default YaTeX-inhibit-prefix-letter t)
 (require 'yatex)
 ;;
 (autoload 'yatex-mode "yatex" "Yet Another LaTeX mode" t)
-(setq YaTeX-inhibit-prefix-letter t)
+(setq-default YaTeX-inhibit-prefix-letter t)
 (setq YaTeX-kanji-code nil)
-(setq YaTeX-latex-message-code 'utf-8)
+(setq-default YaTeX-latex-message-code 'utf-8)
 (setq YaTeX-use-LaTeX2e t)
 (setq YaTeX-use-AMS-LaTeX t)
-(setq YaTeX-dvi2-command-ext-alist
+(setq-default YaTeX-dvi2-command-ext-alist
       '(("TeXworks\\|texworks\\|texstudio\\|mupdf\\|SumatraPDF\\|Preview\\|Skim\\|TeXShop\\|evince\\|okular\\|zathura\\|qpdfview\\|Firefox\\|firefox\\|chrome\\|chromium\\|Adobe\\|Acrobat\\|AcroRd32\\|acroread\\|pdfopen\\|xdg-open\\|open\\|start" . ".pdf")))
 (setq tex-command "latexmk")
 (setq bibtex-command "latexmk -e \"$latex=q/uplatex %O -kanji=utf8 -no-guess-input-enc -synctex=1 %S/\" -e \"$bibtex=q/upbibtex %O %B/\" -e \"$biber=q/biber %O --bblencoding=utf8 -u -U --output_safechars %B/\" -e \"$makeindex=q/upmendex %O -o %D %S/\" -e \"$dvipdf=q/dvipdfmx %O -o %D %S/\" -norc -gg -pdfdvi")
