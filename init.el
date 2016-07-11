@@ -8,11 +8,17 @@
 (add-to-list 'auto-mode-alist '("\\.sty$" . gfn-latex-mode))
 (add-to-list 'auto-mode-alist '("\\.clo$" . gfn-latex-mode))
 (add-to-list 'auto-mode-alist '("\\.bbl$" . gfn-latex-mode))
+
 ;; ---- ---- OCaml ---- ----
 (add-to-list 'auto-mode-alist '("\\.ml$" . tuareg-mode))
 (add-to-list 'auto-mode-alist '("\\.mli$" . tuareg-mode))
 (add-to-list 'auto-mode-alist '("\\.mll$" . tuareg-mode))
 (add-to-list 'auto-mode-alist '("\\.mly$" . tuareg-mode))
+
+;; ---- ---- Macrodown ---- ----
+(add-to-list 'auto-mode-alist '("\\.mcrd$" . mcrd-mode))
+(add-to-list 'auto-mode-alist '("\\.mcrdh$" . mcrd-mode))
+(add-to-list 'auto-mode-alist '("\\.mcrds$" . mcrd-mode))
 
 ;; ==== ==== ==== ==== USER INTERFACE ==== ==== ==== ====
 ;; ---- ---- hide tool bar and menu bar ---- ----
@@ -71,6 +77,7 @@
 (require 'gfn-latex)
 (require 'gfn-first)
 (require 'open-group)
+(require 'mcrd)
 
 ;; ==== ==== ==== ==== DISTRIBUTED PACKAGES ==== ==== ==== ====
 ;; ---- ---- f ---- ----
