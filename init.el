@@ -1,3 +1,7 @@
+(if (not (boundp 'format-message))
+    (defun format-message (s &rest args)
+      (message (apply 'format s args))))
+
 (set-language-environment "Japanese")
 
 ;; ==== ==== ==== ==== FILETYPE ASSOCIATION ==== ==== ==== ====
@@ -26,11 +30,14 @@
 (menu-bar-mode -1)
 
 ;; ---- ---- font settings ---- ----
-(set-face-attribute 'default nil :family "Consolas" :height 130)
-(set-fontset-font nil 'japanese-jisx0208 (font-spec :family "Meiryo UI"))
-(setq face-font-rescale-alist '(("Meiryo UI" . 1.08)))
+;(require 'gfn-font-environment)
 
-;;色
+;(defvar gfn-latin-font-name "Consolas")
+;(defvar gfn-japanese-font-name "Meiryo UI")
+;(set-face-attribute 'default nil :family gfn-latin-font-name :height 130)
+;(set-fontset-font nil 'japanese-jisx0208 (font-spec :family gfn-japanese-font-name))
+;(setq face-font-rescale-alist '((gfn-japanese-font-name . 1.08)))
+
 ;;(set-face-background 'hl-line "darkolivegreen")
 
 ;; ---- ---- highlighting current line ---- ----
@@ -78,6 +85,8 @@
 (require 'gfn-first)
 (require 'open-group)
 (require 'mcrd)
+
+;(require 'gfn-local-environment)
 
 ;; ==== ==== ==== ==== DISTRIBUTED PACKAGES ==== ==== ==== ====
 ;; ---- ---- f ---- ----
@@ -132,6 +141,8 @@
 ;; ---- ---- recentf ---- ----
 (setq recentf-max-saved-items 2000)
 (require 'recentf-ext)
+(require 'recentf)
+(recentf-mode 1)
 
 ;; ---- ---- autoinsert ---- ----
 (auto-insert-mode)
