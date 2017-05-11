@@ -1,4 +1,7 @@
+\#*
 *~
 *.elc
 *.dat
 elpa/
+eshell/
+recentf

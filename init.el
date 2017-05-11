@@ -1,4 +1,7 @@
 (set-language-environment "Japanese")
+;(setq ns-pop-up-frames nil)
+(setq-default indent-tabs-mode nil)
+(setq load-prefer-newer t)
 
 ;; ==== ==== ==== ==== FILETYPE ASSOCIATION ==== ==== ==== ====
 ;; ---- ---- LaTeX ---- ----
@@ -14,6 +17,9 @@
 (add-to-list 'auto-mode-alist '("\\.mli$" . tuareg-mode))
 (add-to-list 'auto-mode-alist '("\\.mll$" . tuareg-mode))
 (add-to-list 'auto-mode-alist '("\\.mly$" . tuareg-mode))
+
+;; ---- ---- Markdown ---- ----
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
 ;; ---- ---- Macrodown ---- ----
 (add-to-list 'auto-mode-alist '("\\.mcrd$" . mcrd-mode))
@@ -68,7 +74,11 @@
 ;; ---- ---- tabbar ---- ----
 (define-key global-map (kbd "M-<right>") 'tabbar-forward-tab)
 (define-key global-map (kbd "M-<left>") 'tabbar-backward-tab)
-
+;; ---- ---- open-junk-file ---- ----
+(define-key global-map (kbd "C-x j") 'open-junk-file)
+;; ---- ---- undo-tree ---- ----
+(define-key global-map (kbd "M-/") 'undo-tree-redo)
+(define-key global-map (kbd "C-z") 'undo-tree-undo)
 ;; ==== ==== ==== ==== OTHER SETTINGS ==== ==== ==== ====
 ;; ---- ---- garbage collection ---- ----
 (setq gc-cons-threshold (* 20 gc-cons-threshold))
@@ -80,6 +90,16 @@
 (require 'mcrd)
 
 ;; ==== ==== ==== ==== DISTRIBUTED PACKAGES ==== ==== ==== ====
+;; ---- ---- package ---- ----
+(require 'package)
+
+(add-to-list 'package-archives '("melpa"        . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("marmalade"    . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("org"          . "http://orgmode.org/elpa/") t)
+
+(package-initialize)
+
 ;; ---- ---- f ---- ----
 ;(require 'f)
 
@@ -101,6 +121,10 @@
 (require 'tabbar)
 (tabbar-mode 1)
 
+;; ---- ---- open-junk-file ---- ----
+(require 'open-junk-file)
+(setq open-junk-file-format "~/junk/%Y/%m/%Y-%m-%d-%H%M%S.")
+
 ;; ---- ---- tuareg ---- ----
 (require 'tuareg)
 (setq tuareg-use-smie nil)
@@ -115,7 +139,6 @@
 ;; ---- ---- undo-tree ---- ----
 (require 'undo-tree)
 (global-undo-tree-mode t)
-(define-key global-map (kbd "M-/") 'undo-tree-redo)
 
 ;; ---- ---- paredit ---- ----
 (require 'paredit) ;paredit
