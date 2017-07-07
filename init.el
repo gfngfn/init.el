@@ -128,6 +128,23 @@
 ;; ---- ---- tuareg ---- ----
 (require 'tuareg)
 (setq tuareg-use-smie nil)
+(custom-set-variables '(tuareg-match-clause-indent 2))
+(defun gfn-insert-paren-pair ()
+  (interactive)
+  (cond ((use-region-p)
+         (let ((rb (region-beginning)))
+           (let ((re (region-end)))
+             (progn
+               (goto-char rb)
+               (insert "(")
+               (goto-char (1+ re))
+               (insert ")")
+               (forward-char -1)))))
+        (t
+         (progn
+           (insert "()")
+           (forward-char -1)))))
+(define-key tuareg-mode-map (kbd "(") 'gfn-insert-paren-pair)
 
 (require 'install-elisp)
 (require 'restart-emacs)
