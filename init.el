@@ -5,6 +5,9 @@
 (setq-default indent-tabs-mode nil)
 
 (set-language-environment "Japanese")
+;(setq ns-pop-up-frames nil)
+(setq-default indent-tabs-mode nil)
+(setq load-prefer-newer t)
 
 ;; ==== ==== ==== ==== FILETYPE ASSOCIATION ==== ==== ==== ====
 ;; ---- ---- LaTeX ---- ----
@@ -20,6 +23,9 @@
 (add-to-list 'auto-mode-alist '("\\.mli$" . tuareg-mode))
 (add-to-list 'auto-mode-alist '("\\.mll$" . tuareg-mode))
 (add-to-list 'auto-mode-alist '("\\.mly$" . tuareg-mode))
+
+;; ---- ---- Markdown ---- ----
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
 ;; ---- ---- Macrodown ---- ----
 (add-to-list 'auto-mode-alist '("\\.mcrd$" . mcrd-mode))
@@ -77,7 +83,11 @@
 ;; ---- ---- tabbar ---- ----
 (define-key global-map (kbd "M-<right>") 'tabbar-forward-tab)
 (define-key global-map (kbd "M-<left>") 'tabbar-backward-tab)
-
+;; ---- ---- open-junk-file ---- ----
+(define-key global-map (kbd "C-x j") 'open-junk-file)
+;; ---- ---- undo-tree ---- ----
+(define-key global-map (kbd "M-/") 'undo-tree-redo)
+(define-key global-map (kbd "C-z") 'undo-tree-undo)
 ;; ==== ==== ==== ==== OTHER SETTINGS ==== ==== ==== ====
 ;; ---- ---- garbage collection ---- ----
 (setq gc-cons-threshold (* 20 gc-cons-threshold))
@@ -91,6 +101,16 @@
 ;(require 'gfn-local-environment)
 
 ;; ==== ==== ==== ==== DISTRIBUTED PACKAGES ==== ==== ==== ====
+;; ---- ---- package ---- ----
+(require 'package)
+
+(add-to-list 'package-archives '("melpa"        . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("marmalade"    . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("org"          . "http://orgmode.org/elpa/") t)
+
+(package-initialize)
+
 ;; ---- ---- f ---- ----
 ;(require 'f)
 
@@ -131,9 +151,30 @@
 (require 'tabbar)
 (tabbar-mode 1)
 
+;; ---- ---- open-junk-file ---- ----
+(require 'open-junk-file)
+(setq open-junk-file-format "~/junk/%Y/%m/%Y-%m-%d-%H%M%S.")
+
 ;; ---- ---- tuareg ---- ----
 (require 'tuareg)
 (setq tuareg-use-smie nil)
+(custom-set-variables '(tuareg-match-clause-indent 2))
+(defun gfn-insert-paren-pair ()
+  (interactive)
+  (cond ((use-region-p)
+         (let ((rb (region-beginning)))
+           (let ((re (region-end)))
+             (progn
+               (goto-char rb)
+               (insert "(")
+               (goto-char (1+ re))
+               (insert ")")
+               (forward-char -1)))))
+        (t
+         (progn
+           (insert "()")
+           (forward-char -1)))))
+(define-key tuareg-mode-map (kbd "(") 'gfn-insert-paren-pair)
 
 (require 'install-elisp)
 (require 'restart-emacs)
@@ -145,7 +186,6 @@
 ;; ---- ---- undo-tree ---- ----
 (require 'undo-tree)
 (global-undo-tree-mode t)
-(define-key global-map (kbd "M-/") 'undo-tree-redo)
 
 ;; ---- ---- paredit ---- ----
 (require 'paredit) ;paredit
