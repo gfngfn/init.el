@@ -2,6 +2,8 @@
     (defun format-message (s &rest args)
       (message (apply 'format s args))))
 
+(setq-default indent-tabs-mode nil)
+
 (set-language-environment "Japanese")
 
 ;; ==== ==== ==== ==== FILETYPE ASSOCIATION ==== ==== ==== ====
@@ -101,6 +103,25 @@
 ;; ---- ---- save-place ---- ----
 ;(setq-default save-place t)
 ;(require 'save-place)
+
+;; ---- ---- package ---- ----
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(package-initialize)
+
+;; ---- ---- markdown-mode ---- ----
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+(autoload 'gfm-mode "gfm-mode"
+   "Major mode for editing GitHub Flavored Markdown files" t)
+(add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+
+;; ---- ---- javascript ---- ----
+(setq js-indent-level 2)
 
 ;; ---- ---- helm ---- ----
 (require 'helm-config)
