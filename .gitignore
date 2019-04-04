@@ -5,3 +5,5 @@
 elpa/
 eshell/
 recentf
+.DS_Store
+network-security.data
