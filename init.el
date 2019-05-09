@@ -109,7 +109,16 @@
 ;; ---- ---- tuareg ---- ----
 (require 'tuareg)
 (setq tuareg-use-smie nil)
-(custom-set-variables '(tuareg-match-clause-indent 2))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (deeper-blue)))
+ '(package-selected-packages
+   (quote
+    (scala-mode markdown-mode yatex undo-tree tuareg tabbar restart-emacs recentf-ext paredit open-junk-file helm auto-complete auto-async-byte-compile)))
+ '(tuareg-match-clause-indent 2))
 (defun gfn-insert-paren-pair ()
   (interactive)
   (cond ((use-region-p)
@@ -214,12 +223,7 @@
              (reftex-mode 1)
              (define-key reftex-mode-map (concat YaTeX-prefix ">") 'YaTeX-comment-region)
              (define-key reftex-mode-map (concat YaTeX-prefix "<") 'YaTeX-uncomment-region)))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (deeper-blue))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
